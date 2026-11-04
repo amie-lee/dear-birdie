@@ -1,0 +1,1 @@
+CREATE INDEX `wishes_exhibition` ON `wishes` (`status`,`created_at`,`id`);

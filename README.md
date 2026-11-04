@@ -6,7 +6,7 @@ A web app for focus sessions, wishes, and anonymous letters.
 
 - **Focus** — write a task and start a focus timer.
 - **Make a wish** — keep a private wish or submit it for sharing.
-- **Find a letter** — discover approved wishes without a waiting period.
+- **Find a letter** — choose and open shared wishes in a floating postcard exhibition.
 - **My letters** — revisit letters saved in your browser.
 
 Built with React, TypeScript, Vinext, and Cloudflare D1.
@@ -18,6 +18,8 @@ npm ci
 npm run db:migrate:local
 npm run dev
 ```
+
+Run the shared-letter regression checks with `npm test` (Node 22.13+).
 
 Personal letters are stored in the current browser. Shared wishes require D1 and review configuration. Without that configuration, submissions remain pending.
 

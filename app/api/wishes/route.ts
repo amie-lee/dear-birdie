@@ -6,9 +6,23 @@ const config = env as unknown as { DB: D1Database; OPENAI_API_KEY?: string; TURN
 const json = (data: unknown, status = 200) => Response.json(data, { status, headers: { "Cache-Control": "no-store" } });
 const digest = async (value: string) => Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value)))).map(n => n.toString(16).padStart(2, "0")).join("");
 
-export async function GET() {
-  const rows = await config.DB.prepare("SELECT id, body FROM wishes WHERE status = 'approved' ORDER BY RANDOM() LIMIT 1").all();
-  return json({ letter: rows.results[0] ?? null });
+export async function GET(request: Request) {
+  const cursor = new URL(request.url).searchParams.get("cursor");
+  let before: number | null = null;
+  let beforeId = "";
+  if (cursor) {
+    const match = /^(\d{1,16}):([a-zA-Z0-9-]{1,100})$/.exec(cursor);
+    if (!match || !Number.isSafeInteger(Number(match[1]))) return json({ error: "Invalid page." }, 400);
+    before = Number(match[1]);
+    beforeId = match[2];
+  }
+  const query = before === null
+    ? config.DB.prepare("SELECT id, body, created_at AS createdAt FROM wishes WHERE status = 'approved' ORDER BY created_at DESC, id DESC LIMIT 25")
+    : config.DB.prepare("SELECT id, body, created_at AS createdAt FROM wishes WHERE status = 'approved' AND (created_at < ? OR (created_at = ? AND id < ?)) ORDER BY created_at DESC, id DESC LIMIT 25").bind(before, before, beforeId);
+  const rows = await query.all<{ id: string; body: string; createdAt: number }>();
+  const letters = rows.results.slice(0, 24);
+  const last = letters.at(-1);
+  return json({ letter: letters[0] ?? null, letters, nextCursor: rows.results.length > 24 && last ? `${last.createdAt}:${last.id}` : null });
 }
 
 export async function POST(request: Request) {
@@ -17,7 +31,7 @@ export async function POST(request: Request) {
   try { payload = await request.json(); } catch { return json({ error: "We could not read your letter." }, 400); }
   const body = typeof payload.body === "string" ? payload.body.trim() : "";
   if (body.length < 10 || body.length > 500) return json({ error: "Write your wish in 10–500 characters." }, 400);
-  if (/[\u0000-\u001f]/.test(body) || /https?:\/\/|www\.|[\w.+-]+@[\w.-]+\.[a-z]{2,}|(?:\+?\d[\d\s().-]{8,}\d)/i.test(body)) return json({ error: "Remove links and contact details before sending." }, 400);
+  if (/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(body) || /https?:\/\/|www\.|[\w.+-]+@[\w.-]+\.[a-z]{2,}|(?:\+?\d[\d\s().-]{8,}\d)/i.test(body)) return json({ error: "Remove links and contact details before sending." }, 400);
   const deleteToken = typeof payload.token === "string" && payload.token.length >= 24 && payload.token.length <= 100 ? payload.token : "";
   if (!deleteToken) return json({ error: "Please try again." }, 400);
 
@@ -29,7 +43,8 @@ export async function POST(request: Request) {
   if ((counter?.count ?? 0) > 5) return json({ error: "You have sent all five shared letters for today." }, 429);
 
   let verified = false;
-  if (config.TURNSTILE_SECRET && typeof payload.turnstile === "string") {
+  if (config.TURNSTILE_SECRET) {
+    if (typeof payload.turnstile !== "string" || !payload.turnstile) return json({ error: "Complete the verification before sending." }, 400);
     const form = new FormData();
     form.set("secret", config.TURNSTILE_SECRET);
     form.set("response", payload.turnstile);
@@ -44,6 +59,7 @@ export async function POST(request: Request) {
   if (verified && config.OPENAI_API_KEY && config.TURNSTILE_SITE_KEY) {
     try {
       const response = await fetch("https://api.openai.com/v1/moderations", {
+        signal: AbortSignal.timeout(10000),
         method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${config.OPENAI_API_KEY}` },
         body: JSON.stringify({ model: "omni-moderation-latest", input: body }),
       });
