@@ -42,11 +42,11 @@ export default function HomeMail({ onFocus, onWish, onFind, onArchive }: HomeMai
   }, [source]);
 
   return (
-    <section className="quiet-home" aria-busy={status === "loading"}>
+    <section className="quiet-home" aria-busy={status === "loading"} onDragStart={event => event.preventDefault()}>
       {status === "ready" ? (
         <div className="home-reveal">
           <div className="mail-object">
-            <img src={source} alt="" fetchPriority="high" />
+            <img src={source} alt="" fetchPriority="high" draggable={false} />
             <h1 className="wordmark">Dear Birdie</h1>
             <div className="mail-choices">
               <button onClick={onFocus}>Focus</button>
