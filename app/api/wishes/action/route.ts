@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     return Response.json({ ok: true });
   }
   if (payload.action === "cheer") {
-    await db.prepare("UPDATE wishes SET cheers = cheers + 1 WHERE id = ? AND status = 'approved' AND available_at <= ?").bind(payload.id, Date.now()).run();
+    await db.prepare("UPDATE wishes SET cheers = cheers + 1 WHERE id = ? AND status = 'approved'").bind(payload.id).run();
     return Response.json({ ok: true });
   }
   if (payload.action === "delete" && typeof payload.token === "string") {

@@ -7,8 +7,7 @@ const json = (data: unknown, status = 200) => Response.json(data, { status, head
 const digest = async (value: string) => Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value)))).map(n => n.toString(16).padStart(2, "0")).join("");
 
 export async function GET() {
-  const now = Date.now();
-  const rows = await config.DB.prepare("SELECT id, body FROM wishes WHERE status = 'approved' AND available_at <= ? ORDER BY RANDOM() LIMIT 1").bind(now).all();
+  const rows = await config.DB.prepare("SELECT id, body FROM wishes WHERE status = 'approved' ORDER BY RANDOM() LIMIT 1").all();
   return json({ letter: rows.results[0] ?? null });
 }
 
@@ -57,6 +56,6 @@ export async function POST(request: Request) {
   const id = crypto.randomUUID();
   const now = Date.now();
   await config.DB.prepare("INSERT INTO wishes (id, body, status, created_at, available_at, cheers, reports, delete_hash) VALUES (?, ?, ?, ?, ?, 0, 0, ?)")
-    .bind(id, body, status, now, now + 86_400_000, await digest(deleteToken)).run();
-  return json({ id, status, availableAt: now + 86_400_000 }, 201);
+    .bind(id, body, status, now, now, await digest(deleteToken)).run();
+  return json({ id, status, availableAt: now }, 201);
 }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display:ital@0;1&family=Mrs+Saint+Delafield&family=La+Belle+Aurore&family=Nothing+You+Could+Do&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display:ital@0;1&family=Mrs+Saint+Delafield&family=La+Belle+Aurore&family=Nothing+You+Could+Do&family=Nanum+Pen+Script&display=swap');
 
 :root {
   --background: #0b0f19;
@@ -7,6 +7,7 @@
   --muted: #929eaf;
   --accent: #8daac8;
   --ink: #202b3b;
+  --letter-hand: 'Nothing You Could Do', 'Nanum Pen Script', cursive;
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--background); color: var(--text); font-family: 'DM Sans', sans-serif; }
@@ -55,7 +56,7 @@ h2 { font: italic 42px/1.1 'DM Serif Display', serif; font-weight: 400; margin: 
 }
 .paper-top { display: flex; justify-content: space-between; font-size: 8px; letter-spacing: .12em; color: #667386; }
 .paper label { display: block; font: 400 32px 'La Belle Aurore', cursive; margin-top: 46px; }
-.paper textarea { display: block; width: 100%; min-height: 190px; margin: 20px 0 0; padding: 0; resize: vertical; border: 0; outline: 0; background: transparent; color: var(--ink); font: 400 22px/1.8 'Nothing You Could Do', cursive; }
+.paper textarea { display: block; width: 100%; min-height: 190px; margin: 20px 0 0; padding: 0; resize: vertical; border: 0; outline: 0; background: transparent; color: var(--ink); font: 400 22px/1.8 var(--letter-hand); }
 .paper textarea::placeholder { color: #768293; }
 .paper textarea:focus, .paper textarea:focus-visible { outline: none; box-shadow: none; }
 .paper:focus-within label { color: #48627f; }
@@ -88,7 +89,7 @@ h2 { font: italic 42px/1.1 'DM Serif Display', serif; font-weight: 400; margin: 
 .find-stage { max-width: 720px; }
 .found-paper { padding: 32px 40px; min-height: 330px; }
 .found-dear { font: 400 32px 'La Belle Aurore', cursive; margin-top: 45px; }
-.found-paper blockquote { font: 19px/1.8 Georgia, serif; margin: 25px 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.found-paper blockquote { font: 22px/1.8 var(--letter-hand); margin: 25px 0; white-space: pre-wrap; overflow-wrap: anywhere; }
 .found-signoff { text-align: right; font: italic 16px Georgia, serif; color: #6b788a; }
 .empty-paper { min-height: 280px; display: grid; place-content: center; text-align: center; color: var(--muted); }
 .empty-paper h3 { font: italic 27px Georgia, serif; font-weight: 400; }
@@ -101,7 +102,7 @@ h2 { font: italic 42px/1.1 'DM Serif Display', serif; font-weight: 400; margin: 
 .archive-card { padding: 25px 28px; min-height: 190px; }
 .archive-card:nth-child(even) { margin-top: 20px; }
 .archive-card-top { display: flex; justify-content: space-between; font-size: 8px; letter-spacing: .06em; color: #667386; }
-.archive-card>p { font: 17px/1.7 Georgia, serif; white-space: pre-wrap; overflow-wrap: anywhere; min-height: 70px; }
+.archive-card>p { font: 20px/1.7 var(--letter-hand); white-space: pre-wrap; overflow-wrap: anywhere; min-height: 70px; }
 .archive-card-bottom { display: flex; gap: 15px; flex-wrap: wrap; align-items: center; font-size: 9px; color: #637185; }
 .archive-card-bottom>span { margin-right: auto; }
 .archive-card-bottom button { display: inline-flex; align-items: center; gap: 4px; }

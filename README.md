@@ -6,7 +6,7 @@ A web app for focus sessions, wishes, and anonymous letters.
 
 - **Focus** — write a task and start a focus timer.
 - **Make a wish** — keep a private wish or submit it for sharing.
-- **Find a letter** — discover reviewed wishes after 24 hours.
+- **Find a letter** — discover approved wishes without a waiting period.
 - **My letters** — revisit letters saved in your browser.
 
 Built with React, TypeScript, Vinext, and Cloudflare D1.
