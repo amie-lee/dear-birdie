@@ -1,4 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display:ital@0;1&family=Mrs+Saint+Delafield&family=La+Belle+Aurore&family=Nothing+You+Could+Do&family=Nanum+Pen+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display:ital@0;1&family=Mrs+Saint+Delafield&family=La+Belle+Aurore&family=Nothing+You+Could+Do&display=swap');
+
+/* Naver Nanum handwriting: https://clova.ai/handwriting */
+@font-face {
+  font-family: 'Nanum SonPyeonJiCe';
+  src: url('/fonts/NanumSonPyeonJiCe.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   --background: #0b0f19;
@@ -7,7 +16,7 @@
   --muted: #929eaf;
   --accent: #8daac8;
   --ink: #202b3b;
-  --letter-hand: 'Nothing You Could Do', 'Nanum Pen Script', cursive;
+  --letter-hand: 'Nothing You Could Do', 'Nanum SonPyeonJiCe', cursive;
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--background); color: var(--text); font-family: 'DM Sans', sans-serif; }
