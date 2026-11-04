@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display:ital@0;1&family=Mrs+Saint+Delafield&family=La+Belle+Aurore&family=Nothing+You+Could+Do&display=swap');
+
+:root {
+  --background: #0b0f19;
+  --paper: #e4e8ed;
+  --text: #f0f3f7;
+  --muted: #929eaf;
+  --accent: #8daac8;
+  --ink: #202b3b;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--background); color: var(--text); font-family: 'DM Sans', sans-serif; }
+button, textarea { font: inherit; }
+button { cursor: pointer; color: inherit; background: none; border: 0; padding: 0; }
+button:disabled { cursor: default; opacity: .5; }
+button:focus-visible { outline: 1px solid var(--accent); outline-offset: 7px; }
+button:hover { color: var(--accent); }
+.site-shell { min-height: 100svh; position: relative; isolation: isolate; }
+.sky, .sky-wash { display: none; }
+.grain { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: url('/paper-grain.svg'); opacity: .2; }
+.topbar { height: 84px; padding: 14px 5vw 0; display: flex; align-items: center; justify-content: space-between; color: var(--muted); }
+.wordmark { font-family: 'Mrs Saint Delafield', cursive; font-weight: 400; }
+.brand { font-size: 36px; line-height: 1; transform: translateY(4px) rotate(-3deg); }
+.topbar nav { display: flex; gap: 28px; font-size: 11px; }
+.quiet-home { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 36px 20px; }
+.mail-object { position: relative; width: min(440px, 78vw); }
+.mail-object>img { display: block; width: 100%; height: auto; }
+.mail-object h1 { position: absolute; top: 68%; left: 0; width: 100%; margin: 0; color: #2c384a; text-align: center; font: 400 clamp(44px,7vw,68px)/1 'Mrs Saint Delafield', cursive; transform: rotate(-3deg); }
+.mail-choices { position: absolute; top: 27%; left: 10%; width: 78%; display: flex; flex-direction: column; align-items: center; gap: 18px; transform: rotate(-3deg); color: var(--ink); }
+.mail-choices button { font: 400 clamp(29px,4.8vw,39px)/1.2 'La Belle Aurore', cursive; }
+.mail-choices button:hover { color: #4b6583; }
+.home-links { display: flex; gap: 32px; margin-top: 25px; font-size: 11px; color: var(--muted); }
+.content-stage { max-width: 1060px; margin: auto; padding: 35px 30px 65px; }
+.section-intro { margin-bottom: 28px; }
+.back-link { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; color: var(--muted); }
+h2 { font: italic 42px/1.1 'DM Serif Display', serif; font-weight: 400; margin: 24px 0 0; }
+.write-stage { max-width: 720px; }
+.write-stage .section-intro { display: flex; align-items: baseline; justify-content: space-between; }
+.write-stage h2 { font-size: 30px; }
+.letter-wrap { width: 100%; }
+.paper, .found-paper, .archive-card { color: var(--ink); background: var(--paper) url('/paper-grain.svg'); position: relative; }
+.paper {
+  padding: 34px 44px;
+  min-height: 440px;
+  background: transparent;
+  isolation: isolate;
+}
+.paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url('/cool-postcard.webp') center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+.paper-top { display: flex; justify-content: space-between; font-size: 8px; letter-spacing: .12em; color: #667386; }
+.paper label { display: block; font: 400 32px 'La Belle Aurore', cursive; margin-top: 46px; }
+.paper textarea { display: block; width: 100%; min-height: 190px; margin: 20px 0 0; padding: 0; resize: vertical; border: 0; outline: 0; background: transparent; color: var(--ink); font: 400 22px/1.8 'Nothing You Could Do', cursive; }
+.paper textarea::placeholder { color: #768293; }
+.paper textarea:focus, .paper textarea:focus-visible { outline: none; box-shadow: none; }
+.paper:focus-within label { color: #48627f; }
+.paper-signoff { text-align: right; font: 400 23px/1.5 'La Belle Aurore', cursive; color: #6b788a; margin-top: 12px; }
+.paper-signoff em { font: 32px 'Mrs Saint Delafield', cursive; }
+.paper-line { display: none; }
+.letter-options { padding-top: 23px; }
+.option-label { display: block; margin-bottom: 12px; font-size: 10px; color: var(--muted); }
+.option-pills { display: flex; gap: 24px; }
+.option-pills button { padding-bottom: 7px; font-size: 12px; color: var(--muted); border-bottom: 1px solid transparent; }
+.option-pills .selected { color: var(--text); border-color: var(--accent); }
+.visibility-options { display: flex; gap: 30px; }
+.visibility-options button { text-align: left; color: var(--muted); }
+.visibility-options strong { display: block; font-size: 12px; font-weight: 400; }
+.visibility-options small { display: block; font-size: 10px; margin-top: 6px; }
+.visibility-options .selected strong { color: var(--text); text-decoration: underline; text-underline-offset: 6px; }
+.option-hint { font-size: 10px; color: var(--muted); margin-top: 18px; }
+.send-row { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; }
+.send-row>span { font-size: 10px; color: var(--muted); }
+.ink-button, .primary-button, .outline-button { display: inline-flex; gap: 10px; align-items: center; font-size: 12px; padding: 9px 0; }
+.ink-button { font: italic 25px 'DM Serif Display', serif; }
+.error { color: #d4a2b0; font-size: 12px; }
+.timer-stage, .sent-stage { min-height: calc(100svh - 84px); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 50px 25px; text-align: center; }
+.time-display { font: 400 clamp(90px,15vw,185px)/1 'DM Serif Display', serif; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.timer-letter { font: italic 18px/1.7 Georgia, serif; max-width: 500px; margin: 30px 0; overflow-wrap: anywhere; }
+.timer-controls, .timer-complete>div, .sent-actions { display: flex; justify-content: center; gap: 30px; margin-top: 20px; }
+.timer-controls button { display: inline-flex; gap: 8px; align-items: center; font-size: 11px; color: var(--muted); }
+.timer-complete p, .sent-status { color: var(--muted); font-size: 12px; }
+.sent-stage h2 { font-size: 76px; margin: 0 0 15px; }
+.find-stage { max-width: 720px; }
+.found-paper { padding: 32px 40px; min-height: 330px; }
+.found-dear { font: 400 32px 'La Belle Aurore', cursive; margin-top: 45px; }
+.found-paper blockquote { font: 19px/1.8 Georgia, serif; margin: 25px 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.found-signoff { text-align: right; font: italic 16px Georgia, serif; color: #6b788a; }
+.empty-paper { min-height: 280px; display: grid; place-content: center; text-align: center; color: var(--muted); }
+.empty-paper h3 { font: italic 27px Georgia, serif; font-weight: 400; }
+.found-actions { display: flex; align-items: center; gap: 23px; margin-top: 25px; flex-wrap: wrap; }
+.text-button, .report-button { display: inline-flex; gap: 8px; align-items: center; font-size: 11px; color: var(--muted); }
+.report-button { margin-left: auto; }
+.archive-stage { max-width: 1020px; margin: auto; padding: 35px 30px 65px; }
+.archive-heading { margin-bottom: 35px; }
+.archive-list { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 25px; align-items: start; }
+.archive-card { padding: 25px 28px; min-height: 190px; }
+.archive-card:nth-child(even) { margin-top: 20px; }
+.archive-card-top { display: flex; justify-content: space-between; font-size: 8px; letter-spacing: .06em; color: #667386; }
+.archive-card>p { font: 17px/1.7 Georgia, serif; white-space: pre-wrap; overflow-wrap: anywhere; min-height: 70px; }
+.archive-card-bottom { display: flex; gap: 15px; flex-wrap: wrap; align-items: center; font-size: 9px; color: #637185; }
+.archive-card-bottom>span { margin-right: auto; }
+.archive-card-bottom button { display: inline-flex; align-items: center; gap: 4px; }
+.archive-empty { grid-column: 1/-1; padding: 80px 0; text-align: center; color: var(--muted); font-size: 13px; }
+.archive-empty button { display: inline-flex; gap: 8px; align-items: center; margin-top: 15px; color: var(--text); }
+.storage-note { margin-top: 30px; font-size: 10px; color: var(--muted); }
+.dispatch { height: 100svh; overflow: hidden; position: relative; }
+.approved-sequence .parcel-trip { position: absolute; left: 50%; top: 50%; }
+.fold-sheet { position: absolute; width: 128px; height: 84px; left: -64px; top: -42px; perspective: 350px; animation: shrink 1.5s both; }
+.fold-sheet>* { position: absolute; left: 0; width: 100%; height: 34%; background: var(--paper) url('/paper-grain.svg'); }
+.fold-sheet i { top: 0; transform-origin: bottom; animation: crease 1.5s both; }
+.fold-sheet b { top: 33%; }
+.fold-sheet em { top: 66%; transform-origin: top; animation: crease-bottom 1.5s both; }
+.approved-flight { display: block; width: 100%; height: 100%; object-fit: contain; filter: grayscale(1); }
+.skip-flight { position: absolute; bottom: 30px; right: 5vw; color: var(--muted); font-size: 11px; padding: 10px; }
+@keyframes crease { 0%,8% { transform: none; } 28%,100% { transform: rotateX(-178deg); } }
+@keyframes crease-bottom { 0%,23% { transform: none; } 42%,100% { transform: rotateX(178deg); } }
+@keyframes shrink { 0%,36% { transform: none; } 90%,100% { transform: translateY(6px) scale(.31) rotate(-10deg); } }
+@media (max-width:600px) {
+  .topbar { padding: 12px 22px 0; height: 76px; }
+  .topbar nav { gap: 19px; font-size: 10px; }
+  .brand { font-size: 33px; }
+  .content-stage, .archive-stage { padding: 20px 22px 50px; }
+  .paper { padding: 30px; min-height: 410px; }
+  .paper textarea { font-size: 21px; }
+  .paper label { font-size: 30px; margin-top: 40px; }
+  .archive-list { grid-template-columns: 1fr; }
+  .archive-card:nth-child(even) { margin-top: 0; }
+  .visibility-options { gap: 20px; }
+  .option-pills { gap: 24px; }
+  .found-paper { padding: 25px; }
+  .mail-choices { gap: 15px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  *, *:before, *:after { animation-duration: .01ms!important; transition-duration: .01ms!important; }
+}
+
+.home-reveal { display: flex; flex-direction: column; align-items: center; animation: home-reveal .3s ease-out both; }
+.home-loading { display: flex; flex-direction: column; align-items: center; gap: 18px; color: var(--muted); }
+.loading-bird { width: 31px; height: 25px; animation: loading-hover 1.7s ease-in-out infinite; }
+.loading-wing { transform-origin: 30px 19px; animation: loading-flap .85s ease-in-out alternate infinite; }
+.home-loading button { font-size: 11px; color: var(--muted); }
+.load-error .loading-bird, .load-error .loading-wing { animation: none; }
+@keyframes loading-hover { 50% { transform: translateY(-3px); } }
+@keyframes loading-flap { to { transform: scaleY(.18) rotate(-12deg); } }
+@keyframes home-reveal { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion:reduce) {
+  .loading-bird, .loading-wing, .home-reveal { animation: none!important; }
+}
