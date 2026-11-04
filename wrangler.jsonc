@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dear-birdie",
+  "account_id": "43a12735ef6a40865c5ebd0cb7cbfd20",
+  "main": "./worker/index.ts",
+  "compatibility_date": "2026-05-15",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "preview_urls": false,
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "dear-birdie",
+      "database_id": "5db1cb7d-7b97-4d95-aaca-196d5cc12de6",
+      "migrations_dir": "./drizzle"
+    }
+  ]
+}
