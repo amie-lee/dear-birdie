@@ -23,7 +23,7 @@ Personal letters are stored in the current browser. Shared wishes require D1 and
 
 ## Deployment
 
-Live: https://dear-birdie.later-test-amie.workers.dev
+Live: https://dear-birdie.quiet-works.workers.dev
 
 Deploy to the configured Cloudflare Workers account and D1 database:
 
