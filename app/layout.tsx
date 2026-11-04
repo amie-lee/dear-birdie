@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const title = "Dear Birdie — A little letter, carried somewhere";
+const title = "Dear Birdie";
 const description = "A little post office for focus, wishes, and thoughts in flight.";
 
 export const metadata: Metadata = {
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Dear Birdie — an open paper envelope for focus and wishes" }],
   },
   twitter: { card: "summary_large_image", title, description, images: ["/og-image.png"] },
-  title: "Dear Birdie — A little letter, carried somewhere",
+  title,
   description: "A little post office for focus, wishes, and thoughts in flight.",
-  icons: { icon: "/favicon.svg" },
+  icons: { icon: [{ url: "/favicon.svg?v=2", type: "image/svg+xml", sizes: "any" }] },
 };
 
 export default function RootLayout({
